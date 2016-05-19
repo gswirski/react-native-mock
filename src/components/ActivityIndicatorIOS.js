@@ -38,7 +38,7 @@ const ActivityIndicatorIOS = React.createClass({
     onLayout: PropTypes.func,
   },
   render() {
-    return null;
+    return <div data-rn-name="ActivityIndicatorIOS" />;
   },
 });
 

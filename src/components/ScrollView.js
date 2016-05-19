@@ -312,7 +312,7 @@ const ScrollView = React.createClass({
   },
 
   render() {
-    return null;
+    return <div data-rn-name="ScrollView">{this.props.children}</div>;
   },
 });
 

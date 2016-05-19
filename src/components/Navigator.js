@@ -96,7 +96,7 @@ const Navigator = React.createClass({
     SceneConfigs: NavigatorSceneConfigs,
   },
   render() {
-    return null;
+    return <div data-rn-name="Navigator" />;
   }
 });
 

@@ -114,7 +114,7 @@ var Image = React.createClass({
     },
   },
   render() {
-    return null;
+    return <div data-rn-name="Image" />;
   },
 });
 

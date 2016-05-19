@@ -278,7 +278,7 @@ const View = React.createClass({
     needsOffscreenAlphaCompositing: PropTypes.bool,
   },
   render() {
-    return null;
+    return <div data-rn-name="View">{this.props.children}</div>;
   },
 });
 

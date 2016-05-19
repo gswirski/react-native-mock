@@ -137,7 +137,7 @@ const WebView = React.createClass({
     return React.findNodeHandle(this.refs[RCT_WEBVIEW_REF]);
   },
   render() {
-    return null;
+    return <div data-rn-name="WebView" />;
   },
 });
 
