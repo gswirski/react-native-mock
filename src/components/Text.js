@@ -45,7 +45,7 @@ const Text = React.createClass({
     allowFontScaling: React.PropTypes.bool,
   },
   render() {
-    return <div data-rn-name="Text">{this.props.children}</div>;
+    return <div data-rn-name="Text" onClick={this.props.onPress}>{this.props.children}</div>;
   },
 });
 

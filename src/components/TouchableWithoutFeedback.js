@@ -71,7 +71,7 @@ const TouchableWithoutFeedback = React.createClass({
     hitSlop: EdgeInsetsPropType,
   },
   render() {
-    return <div data-rn-name="TouchableWithoutFeedback">{this.props.children}</div>;
+    return <div data-rn-name="TouchableWithoutFeedback" onClick={onPress}>{this.props.children}</div>;
   },
 });
 
