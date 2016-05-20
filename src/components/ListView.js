@@ -1,22 +1,11 @@
 import React from 'react';
+const { PropTypes } = React;
 import ScrollResponder from '../mixins/ScrollResponder';
 import TimerMixin from 'react-timer-mixin';
 import ScrollViewManager from '../NativeModules/ScrollViewManager';
 import ScrollView from './ScrollView';
 
 var ListViewDataSource = require('../api/ListViewDataSource');
-//var React = require('React');
-
-//var ScrollView = require('ScrollView');
-//var ScrollResponder = require('ScrollResponder');
-// var StaticRenderer = require('StaticRenderer');  // Unused
-//var TimerMixin = require('react-timer-mixin');
-
-// var isEmpty = require('isEmpty'); // Doesnt resolve
-// var logError = require('logError'); // Doesnt resolve
-//var merge = require('merge');
-
-const { PropTypes } = React;
 
 const DEFAULT_PAGE_SIZE = 1;
 const DEFAULT_INITIAL_ROWS = 10;
@@ -178,7 +167,63 @@ const ListView = React.createClass({
   },
 
   render() {
-    return <div data-rn-name="ListView" />;
+    let ds = this.props.dataSource;
+
+    let header = null;
+    if (this.props.renderHeader) {
+      header = <div data-rn-name="ListViewHeader">{this.props.renderHeader()}</div>;
+    }
+
+    let footer = null;
+    if (this.props.renderFooter) {
+      footer = <div data-rn-name="ListViewFooter">{this.props.renderFooter()}</div>;
+    }
+
+    let sections = ds._sectionIds.map((section) => {
+      let sectionData = ds.getSection(section);
+
+      let sectionHeader = null;
+      if (this.props.renderSectionHeader) {
+        sectionHeader = (
+          <div data-rn-name="ListViewSectionHeader">
+            {this.props.renderSectionHeader(sectionData, section)}
+          </div>
+        );
+      }
+
+      let rows = ds.getRowIds(section).map((row) => {
+        let rowData = ds.getRow(section, row);
+
+        let rowView = null;
+        if (this.props.renderRow) {
+          rowView = (
+            <div data-rn-name="ListViewRow" key={row}>
+              {this.props.renderRow(rowData, section, row)}
+            </div>
+          );
+        }
+
+        return rowView;
+      });
+
+      return (
+        <div data-rn-name="ListViewSection" key={section}>
+          {sectionHeader}
+          <div data-rn-name="ListViewSectionRows">
+            {rows}
+          </div>
+        </div>
+      );
+    });
+
+
+    return (
+      <div data-rn-name="ListView">
+        {header}
+        {sections}
+        {footer}
+      </div>
+    );
   },
 });
 
